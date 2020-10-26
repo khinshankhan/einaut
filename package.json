@@ -2,7 +2,7 @@
   "name": "einaut",
   "version": "1.0.0",
   "description": "A Discord bot to bridge servers",
-  "main": "index.js",
+  "main": "dist/index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/kkhan01/einaut.git"
@@ -10,10 +10,12 @@
   "author": "Khinshan Khan",
   "license": "MIT",
   "scripts": {
-    "watch": "npm ci",
+    "dev": "concurrently \"tsc -w\" \"pm2-dev start pm2.config.json\"",
+    "start": "tsc && pm2 start pm2.config.json",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
+    "concurrently": "^5.3.0",
     "discord.js": "^12.4.1",
     "dotenv": "^8.2.0",
     "typescript": "^4.0.3"

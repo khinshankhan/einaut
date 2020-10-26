@@ -1,5 +1,4 @@
 import { Client, Message } from "discord.js";
-require("dotenv").config();
 
 const client = new Client();
 
