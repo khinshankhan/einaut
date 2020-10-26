@@ -14,3 +14,13 @@ client.on("message", (message: Message) => {
 });
 
 client.login();
+
+const gracefulShutdown = () => {
+    console.log("Entering graceful shutdown.");
+
+    console.log("Graceful shutdown complete.");
+    process.exit(0);
+};
+
+process.on("SIGINT", gracefulShutdown);
+process.on("SIGTERM", gracefulShutdown);
