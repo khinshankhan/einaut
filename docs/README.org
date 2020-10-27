@@ -28,4 +28,4 @@
 
 * License
 
-  This project uses an MIT license, which can be viewed [[file:LICENSE.org][here]].
+  This project uses an MIT license, which can be viewed [[file:~/github/einaut/LICENSE.org][here]].
