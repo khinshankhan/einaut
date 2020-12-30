@@ -3,8 +3,7 @@
     {
       "name": "einaut",
       "cwd": ".",
-      "script": "./dist/index.js",
-      "node_args": "-r dotenv/config"
+      "script": "./dist/index.js"
     }
   ]
 }
