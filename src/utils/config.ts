@@ -1,11 +1,7 @@
 import fs from "fs";
 
-import {
-    DISCORD_TOKEN,
-    REGULAR_PREFIX,
-    EPHEMERAL_PREFIX,
-    SERVERS_LOOKUP
-} from "./env";
+import { DISCORD_TOKEN, REGULAR_PREFIX, EPHEMERAL_PREFIX } from "./env";
+import { servers } from "./servers";
 
 export const prefixP = (prefix: string) =>
     prefix.startsWith(REGULAR_PREFIX) || prefix.startsWith(EPHEMERAL_PREFIX);
@@ -27,14 +23,8 @@ const createBackup = () => ({
         REGULAR_PREFIX,
         EPHEMERAL_PREFIX
     },
-    SERVERS: createServersStructure(SERVERS_LOOKUP)
+    SERVERS: createServersStructure(servers)
 });
 
 export const writeToBackup = () =>
-    fs.writeFile("test.json", JSON.stringify(createBackup(), null, 2), err => {
-        if (err) {
-            console.log(err);
-        } else {
-            console.log("Successfully created fresh backup.");
-        }
-    });
+    fs.writeFileSync("backup.json", JSON.stringify(createBackup(), null, 2));
