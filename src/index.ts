@@ -2,7 +2,13 @@ import { Client, Message } from "discord.js";
 
 import { DISCORD_TOKEN, EPHEMERAL_PREFIX } from "./utils/env";
 import { prefixP, writeToBackup } from "./utils/config";
-import { serverLookup, commandLookup } from "./utils/lookup";
+import {
+    serverLookup,
+    commandLookup,
+    generalCommandLookup
+} from "./utils/lookup";
+import * as general from "./commands/general";
+import * as restricted from "./commands/restricted";
 
 const client = new Client();
 
@@ -17,7 +23,7 @@ client.on("message", (message: Message) => {
             message.delete();
         }
 
-        const [, copula, modifier] = message.content.split(" ");
+        const [, copula, modifier, independent] = message.content.split(" ");
         const server = serverLookup(copula);
         const command = commandLookup(copula);
 
@@ -26,8 +32,21 @@ client.on("message", (message: Message) => {
             console.log(serverLookup(copula), channel);
             message.channel.send("pong!");
         } else if (command) {
-            // TODO: add in general and restricted command support
-            message.channel.send("commands unsupported");
+            let reply = null;
+            if (generalCommandLookup(copula)) {
+                reply = general[copula as keyof typeof general](modifier, independent);
+            } else {
+                // TODO: add in general and restricted command support
+                reply = restricted[copula as keyof typeof restricted](
+                    modifier,
+                    independent
+                );
+            }
+
+            // NOTE: rules out both null and undefined
+            if (reply != null) {
+                message.channel.send("general command");
+            }
         } else if (copula) {
             message.channel.send("invalid command");
         } else {
