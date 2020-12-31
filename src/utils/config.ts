@@ -3,9 +3,6 @@ import fs from "fs";
 import { DISCORD_TOKEN, REGULAR_PREFIX, EPHEMERAL_PREFIX } from "./env";
 import { servers } from "./servers";
 
-export const prefixP = (prefix: string) =>
-    prefix.startsWith(REGULAR_PREFIX) || prefix.startsWith(EPHEMERAL_PREFIX);
-
 const createServersStructure = (lookup: { [key: string]: string }) =>
     Object.entries(lookup).reduce((stored, [shortcut, serverLink]) => {
         if (stored[shortcut]) {
