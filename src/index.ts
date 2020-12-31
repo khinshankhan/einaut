@@ -1,7 +1,8 @@
 import { Client, Message } from "discord.js";
 
 import { DISCORD_TOKEN, EPHEMERAL_PREFIX } from "./utils/env";
-import { prefixp } from "./utils/config";
+import { prefixP } from "./utils/config";
+import { serverLookup } from "./utils/lookup";
 
 const client = new Client();
 
@@ -11,11 +12,13 @@ client.on("ready", () => {
 
 client.on("message", (message: Message) => {
     if (message.author.bot) return;
-    if (prefixp(message.content)) {
+    if (prefixP(message.content)) {
         if (message.content.startsWith(EPHEMERAL_PREFIX)) {
             message.delete();
         }
 
+        const [, command, potential] = message.content.split(" ");
+        console.log(serverLookup(command), potential);
         message.channel.send("pong!");
     }
 });
