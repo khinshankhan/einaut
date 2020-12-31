@@ -19,7 +19,7 @@ const SERVERS_LOOKUP = Object.entries(SERVERS).reduce(
             {}
         )
     }),
-    {}
+    {} as { [key: string]: string }
 );
 
 export { DISCORD_TOKEN, REGULAR_PREFIX, EPHEMERAL_PREFIX, SERVERS_LOOKUP };

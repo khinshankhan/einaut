@@ -1,7 +1,7 @@
 import { Client, Message } from "discord.js";
 
 import { DISCORD_TOKEN, EPHEMERAL_PREFIX } from "./utils/env";
-import { prefixP } from "./utils/config";
+import { prefixP, writeToBackup } from "./utils/config";
 import { serverLookup, commandLookup } from "./utils/lookup";
 
 const client = new Client();
@@ -41,7 +41,7 @@ client.login(DISCORD_TOKEN);
 
 const gracefulShutdown = () => {
     console.log("Entering graceful shutdown.");
-    // TODO: create backup cache here
+    writeToBackup();
     console.log("Graceful shutdown complete.");
     process.exit(0);
 };
