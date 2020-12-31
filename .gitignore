@@ -1,7 +1,12 @@
+# general js/ ts
 node_modules
 /dist
 .env
 .log
+
+# general env
 .DS_Store
 
+# project env files
 src/config/config.json
+backup.json
