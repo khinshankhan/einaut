@@ -2,7 +2,7 @@ import { Client, Message } from "discord.js";
 
 import { DISCORD_TOKEN, EPHEMERAL_PREFIX } from "./utils/env";
 import { prefixP } from "./utils/config";
-import { serverLookup } from "./utils/lookup";
+import { serverLookup, commandLookup } from "./utils/lookup";
 
 const client = new Client();
 
@@ -17,9 +17,23 @@ client.on("message", (message: Message) => {
             message.delete();
         }
 
-        const [, command, potential] = message.content.split(" ");
-        console.log(serverLookup(command), potential);
-        message.channel.send("pong!");
+        const [, copula, modifier] = message.content.split(" ");
+        const server = serverLookup(copula);
+        const command = commandLookup(copula);
+
+        if (server) {
+            const channel = server && modifier && "channel";
+            console.log(serverLookup(copula), channel);
+            message.channel.send("pong!");
+        } else if (command) {
+            // TODO: add in general and restricted command support
+            message.channel.send("commands unsupported");
+        } else if (copula) {
+            message.channel.send("invalid command");
+        } else {
+            // TODO: send general bot info
+            message.channel.send("info?");
+        }
     }
 });
 
