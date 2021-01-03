@@ -24,4 +24,4 @@ const createBackup = () => ({
 });
 
 export const writeToBackup = () =>
-    fs.writeFileSync("backup.json", JSON.stringify(createBackup(), null, 2));
+    fs.writeFileSync("data/backup.json", JSON.stringify(createBackup(), null, 2));
