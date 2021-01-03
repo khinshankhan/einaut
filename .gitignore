@@ -9,4 +9,4 @@ node_modules
 
 # project env files
 src/config/config.json
-backup.json
+data/*
